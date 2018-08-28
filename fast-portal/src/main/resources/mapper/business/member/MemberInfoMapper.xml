@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cctc.fast.portal.business.member.mapper.MemberInfoMapper">
+
+	<!-- 获取会员列表  
+	<select id="selectMemberInfoListPage" parameterType="map" resultType="com.cctc.fast.portal.business.member.vo.MemberInfoVo">
+	  SELECT
+	    a.*,b.notice_status as noticeStatus ,b.read_time as readTime,b.notice_detail_id as noticeDetailId
+	  FROM
+	    t_notice_info a
+	  RIGHT JOIN t_notice_detail b ON a.notice_id = b.notice_id
+	  WHERE 1=1
+	  
+	  <if test="noticeType!=null">  
+      	and a.notice_type = #{noticeType}
+      </if>
+      
+      and b.delete_flag = 1
+	  
+	  ORDER BY b.create_time DESC
+	</select>
+	
+	resultMap="memberInfoVo" 
+	  -->
+	  
+	  <!-- 
+	<resultMap id="memberInfoVo" type="com.cctc.fast.portal.business.member.vo.MemberInfoVo" >
+		<id property="memberId" column="member_id"/>
+		<result property="memberName" column="member_name"/>
+	</resultMap>  --> 
+	  
+	<select id="selectMemberInfoListPage" parameterType="java.util.Map" resultType="com.cctc.fast.portal.business.member.vo.MemberInfoVo">
+	  SELECT
+	    a.*, b.*,c.member_level_name
+	  FROM
+	    t_member_info a 
+	    LEFT JOIN t_member_card  b  ON  a.member_card_code = b.member_card_code AND b.delete_flag = 1
+	    LEFT JOIN t_member_level c  ON  b.member_level_id  = c.member_level_id AND c.delete_flag = 1
+	  WHERE
+	  <if test="searchVal!=null and searchVal != ''">  
+      	(a.member_card_code like #{searchVal} or member_name like #{searchVal} or member_phone like #{searchVal} ) AND
+      </if>
+      	a.delete_flag = 1
+		ORDER BY a.create_time DESC
+	</select>
+
+	
+</mapper>

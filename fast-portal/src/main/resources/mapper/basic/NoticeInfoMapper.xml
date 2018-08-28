@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cctc.fast.portal.basic.mapper.NoticeMapper">
+
+	
+	<select id="selectNoticeListPage" parameterType="map" resultType="com.cctc.fast.portal.basic.entity.NoticeInfo">
+	  SELECT
+	    a.*,b.notice_status as noticeStatus ,b.read_time as readTime,b.notice_detail_id as noticeDetailId
+	  FROM
+	    t_notice_info a
+	  RIGHT JOIN t_notice_detail b ON a.notice_id = b.notice_id
+	  WHERE 1=1
+	  
+	  <if test="noticeType!=null">  
+      	and a.notice_type = #{noticeType}
+      </if>
+      
+      and b.delete_flag = 1
+	  
+	  ORDER BY b.create_time DESC
+	</select>
+
+	
+</mapper>

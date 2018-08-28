@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>添加会员--后台管理系统 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="${request.contextPath}/assets/plugins/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="${request.contextPath}/assets/css/public.css" media="all" />
+	<link rel="stylesheet" href="${request.contextPath}/assets/css/formSelects-v4.css" media="all" />
+	<style type="text/css">
+		.layui-form-item {
+		    margin-bottom: 0px;
+		    clear: both;
+		}
+	</style>
+	
+	<script type="text/javascript">
+		// 系统路径
+		var contextPath = "${request.contextPath}";
+	</script>
+</head>
+<body class="childrenBody">
+	<form class="layui-form" style="width:90%;" id="memberForm">
+	
+		<blockquote class="layui-elem-quote">
+			账户信息
+		</blockquote>
+	  	
+	  	<div class="layui-form-item">
+	  		<div class="layui-row">
+		  		<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">会员编号</label>
+		    		<div class="layui-input-inline" style="width: 60%;">
+				    	<input type="text" name="memberCardCode" id="memberCardCode" placeholder="请输入或生成会员编号" autocomplete="off" class="layui-input" required lay-verify="required">
+				    </div>
+				    <i class="layui-icon layui-icon-refresh" style="font-size: 35px;" id="createMemberCardCode"></i>
+		    	</div>
+		    	
+		    	<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">会员等级</label>
+		    		<div class="layui-input-block" style="width: 60%;">
+			    		<select name="memberLevelId" id="memberLevelId" required lay-verify="required" >
+				        	<option value="">请选择会员等级</option>
+				      	</select>
+				    </div>
+		    	</div>
+	    	</div>
+	  	</div>
+	  	
+	  	<div class="layui-form-item">
+	  		<div class="layui-row">
+		  		<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">推荐人</label>
+		    		<div class="layui-input-inline" style="width: 60%;">
+				    	<input type="text" name="referenceId" id="referenceId" placeholder="请输入推荐人" autocomplete="off" class="layui-input">
+				    </div>
+				    <i class="custom-icon icon-yonghuzongshu"></i>
+		    	</div>
+		    	
+		    	<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">开卡日期</label>
+		    		<div class="layui-input-inline" style="width: 50%;">
+				    	<input type="text" name="cardDate" id="cardDate" placeholder="请选择开卡日期" autocomplete="off" class="layui-input" lay-verify="date">
+				    </div>
+				    <div class="layui-form-mid layui-word-aux">辅助文字</div>
+		    	</div>
+	    	</div>
+	  	</div>
+	  	
+	  	
+	  	<blockquote class="layui-elem-quote">
+			会员信息
+		</blockquote>
+	  	
+	  	<div class="layui-form-item">
+	  		<div class="layui-row">
+		  		<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">会员姓名</label>
+		    		<div class="layui-input-block" style="width: 60%;">
+				    	<input type="text" name="memberName" id="memberName" placeholder="请输入会员姓名" autocomplete="off" class="layui-input" lay-verify="username">
+				    </div>
+		    	</div>
+		    	
+		    	<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">会员性别</label>
+		    		<div class="layui-input-block memberSex">
+				    </div>
+		    	</div>
+	    	</div>
+	  	</div>
+	  	
+	  	<div class="layui-form-item">
+	  		<div class="layui-row">
+		  		<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">手机号码</label>
+		    		<div class="layui-input-block" style="width: 60%;">
+				    	<input type="text" name="memberPhone" id="memberPhone" placeholder="请输入手机号码" autocomplete="off" class="layui-input"  lay-verify="phone">
+				    </div>
+		    	</div>
+		    	
+		    	<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">固定电话</label>
+		    		<div class="layui-input-block" style="width: 60%;">
+				    	<input type="text" name="memberTel" id="memberTel" placeholder="请输入固定电话" autocomplete="off" class="layui-input">
+				    </div>
+		    	</div>
+	    	</div>
+	  	</div>
+	  	
+	  	
+	  	<div class="layui-form-item">
+	  		<div class="layui-row">
+		  		<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">地区</label>
+		    		<div class="layui-input-block" style="width: 60%;">
+				    	<select name="area" xm-select="area" xm-select-radio="" >
+					        <option value="">请选择地区</option>
+					    </select>
+				    </div>
+		    	</div>
+		    	
+		    	<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">详细地址</label>
+		    		<div class="layui-input-block" style="width: 60%;">
+				    	<input type="text" name="address" id="address" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+				    </div>
+		    	</div>
+	    	</div>
+	  	</div>
+	  	
+	  	<div class="layui-form-item">
+	  		<div class="layui-row">
+		  		<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">身份证号</label>
+		    		<div class="layui-input-block" style="width: 60%;">
+				    	<input type="text" name="identityCard" id="identityCard" placeholder="请输入身份证号" autocomplete="off" class="layui-input" lay-verify="identity">
+				    </div>
+		    	</div>
+		    	
+		    	<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">出生日期</label>
+		    		<div class="layui-input-inline" style="width: 30%;">
+				    	<input type="text" name="birthDate" id="birthDate" placeholder="请选择出生日期" autocomplete="off" class="layui-input" lay-verify="date">
+				    </div>
+				    <div class="layui-input-inline" style="width: 25%;">
+				    	<input type="text" name="memberAge" id="memberAge" placeholder="请输入年龄" autocomplete="off" class="layui-input" lay-verify="number">
+				    </div>
+				    <div class="layui-form-mid layui-word-aux">岁</div>
+		    	</div>
+		    	
+	    	</div>
+	  	</div>
+	  	
+	  	
+	  	<div class="layui-form-item">
+	  		<div class="layui-row">
+		  		<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">电子邮箱</label>
+		    		<div class="layui-input-block" style="width: 60%;">
+				    	<input type="text" name="emailAddress" id="emailAddress" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input" lay-verify="email">
+				    </div>
+		    	</div>
+		    	
+		    	<div class="magb15 layui-col-md6 layui-col-xs12">
+		    		<label class="layui-form-label">工作单位</label>
+		    		<div class="layui-input-block" style="width: 60%;">
+				    	<input type="text" name="companyName" id="companyName" placeholder="请输入工作单位" autocomplete="off" class="layui-input">
+				    </div>
+		    	</div>
+	    	</div>
+	  	</div>
+	  	
+	  	<div class="layui-form-item">
+	  		<div class="layui-row">
+		  		<div class="magb15 layui-col-md12 layui-col-xs12">
+		    		<label class="layui-form-label">备注</label>
+		    		<div class="layui-input-block" style="width: 80%;">
+				    	<textarea name="remark" id="remark" placeholder="请输入备注" class="layui-textarea"></textarea>
+				    </div>
+		    	</div>
+	    	</div>
+	  	</div>
+	  	
+	  	
+	  	<div class="layui-form-item layui-row layui-col-xs12">
+			<div class="layui-input-block">
+				<button class="layui-btn " lay-submit="" lay-filter="addMember">立即添加</button>
+				<button type="reset" class="layui-btn  layui-btn-primary">取消</button>
+			</div>
+		</div>
+	
+	</form>
+
+
+<script type="text/javascript" src="${request.contextPath}/assets/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/business/member/member/memberAdd.js"></script>
+<script type="text/javascript" src="${request.contextPath}/assets/js/dicCode.js"></script>
+</body>
+</html>

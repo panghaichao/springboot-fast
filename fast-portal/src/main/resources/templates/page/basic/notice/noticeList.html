@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>系统消息--后台管理系统 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="${request.contextPath}/assets/plugins/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="${request.contextPath}/assets/css/public.css" media="all" />
+	<script type="text/javascript">
+		// 系统路径
+		var contextPath = "${request.contextPath}";
+	</script>
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+		<ul class="layui-tab-title">
+	    	<li class="layui-this">全部消息</li>
+	    	<li>通知</li>
+	    	<li>私信</li>
+	    	<li>告警</li>
+	  	</ul>
+	  	
+	  	<div class="layui-tab-content">
+	  		<div class="layui-btn-container">
+	  		  <!-- 
+			  <button class="layui-btn">增加</button>
+			  <button class="layui-btn">编辑</button> -->	
+			  <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn"><i class="layui-icon layui-icon-delete"></i>批量删除</a>
+			</div>
+			
+			<table id="noticeList" lay-filter="noticeList"></table>
+	  	</div>
+	</div>
+</form>	
+<script type="text/javascript" src="${request.contextPath}/assets/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/basic/notice/noticeList.js"></script>
+<script type="text/javascript" src="${request.contextPath}/assets/js/dataUtil.js"></script>
+<script type="text/javascript" src="${request.contextPath}/assets/js/dicCode.js"></script>
+</body>
+</html>
